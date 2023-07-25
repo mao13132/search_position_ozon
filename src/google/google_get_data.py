@@ -36,9 +36,9 @@ class GoogleGetData:
             product['competitor'] = competitor['name']
 
             try:
-                product['link'] = row[0]
+                product['request'] = row[0]
             except:
-                product['link'] = ''
+                product['request'] = ''
 
             product['name_sheet'] = name_sheet
             product['x'] = competitor['index']
