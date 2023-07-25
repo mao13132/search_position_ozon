@@ -2,6 +2,7 @@ import time
 
 from src.google.google_write_data import GoogleWriteData
 from src.ozon.job_article import JobArticle
+from src.ozon.job_region import JobRegion
 from src.ozon.start_ozon import StartOzon
 
 
@@ -43,5 +44,7 @@ class StartIter:
 
             if not res_job_article:
                 continue
+
+            res_job_region = JobRegion(self.driver).start_job_region(input_data_list[1], 'Москва')
 
             print()

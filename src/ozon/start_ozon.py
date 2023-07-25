@@ -202,7 +202,6 @@ class StartOzon():
         print(f'Не смог перейти в меню поиска позиций')
         return False
 
-
     def start_load_ozon(self):
         link = f'https://seller.ozon.ru/app/analytics/search-results/validator'
 
