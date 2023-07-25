@@ -37,7 +37,7 @@ class GoogleGetSheetsName:
 
             _temp_ip = {}
 
-            if 'Конкурент' in colm:
+            if 'Запрос' in colm:
                 _temp_ip['name'] = colm
                 _temp_ip['index'] = count
 

@@ -3,11 +3,12 @@ from src.google._slovar import colums_slovar
 
 
 class GoogleGetData:
-    def __init__(self, google_core, name_index_list):
+    def __init__(self, google_core, name_index_list, article_list):
         self.google_core = google_core
         self.service = google_core.service
         self.name_index_list = name_index_list
         self.count_load_rows = 100000
+        self.article_list = article_list
 
     def get_columns(self, x, y, name_sheet):
         self.values = self.service.spreadsheets().values().get(
@@ -43,6 +44,7 @@ class GoogleGetData:
             product['x'] = competitor['index']
             product['y'] = f"{colums_slovar[competitor['index']]}{y_start + count}"
             product['price_index'] = f"{colums_slovar[competitor['index'] + 1]}{y_start + count}"
+            product['article'] = self.article_list[count][0]
 
             good_dict.append(product)
 

@@ -26,14 +26,28 @@ class GoogleGetNameColums:
     @staticmethod
     def get_index_competitor(list_name_columns):
         ip_list_index = []
+        article = 0
         for count, colm in enumerate(list_name_columns['values'][0]):
 
             _temp_ip = {}
 
-            if 'Конкурент' in colm:
+            if 'Артикул' in colm:
+                article = count
+
+            if 'Запрос' in colm:
                 _temp_ip['name'] = colm
                 _temp_ip['index'] = count
+                _temp_ip['article_inx'] = article
 
                 ip_list_index.append(_temp_ip)
 
         return ip_list_index
+
+    # @staticmethod
+    # def get_index_article(list_name_columns):
+    #     for count, colm in enumerate(list_name_columns['values'][0]):
+    #
+    #         if 'Артикул' in colm:
+    #             return count
+    #
+    #     return False
