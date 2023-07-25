@@ -20,6 +20,10 @@ class JobArticle:
         # вызываю окно с выбором товара для вставки артикула
         res_popup = self.ozon_core.loop_open_popup_products(row)
 
+        time.sleep(1)
+
+        res_reset = self.ozon_core.reset_article()
+
         res_insert_article = self.ozon_core.loop_insert_article(article)
 
         time.sleep(2)

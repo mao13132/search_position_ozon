@@ -14,9 +14,9 @@ def main():
 
     google_core = GoogleModul(os.getcwd()).connect_sheet()
 
-    # data_pars_dict = GoogleStart(google_core).start_get_data()
+    data_pars_dict = GoogleStart(google_core).start_get_data()
 
-    data_pars_dict = [{'competitor': 'Запрос 1', 'request': 'чайник заварочный', 'name_sheet': 'Benerich', 'x': 4, 'y': 'E2', 'price_index': 'F2', 'article': 'BNR00022'}, {'competitor': 'Запрос 1', 'request': 'чайник заварочный', 'name_sheet': 'Benerich', 'x': 4, 'y': 'E3', 'price_index': 'F3', 'article': 'BNR00033'}, {'competitor': 'Запрос 1', 'request': 'банки для сыпучих продуктов', 'name_sheet': 'Benerich', 'x': 4, 'y': 'E4', 'price_index': 'F4', 'article': 'BNR00034'}]
+    # data_pars_dict = [{'competitor': 'Запрос 1', 'request': 'чайник заварочный', 'name_sheet': 'Benerich', 'x': 4, 'y': 'E2', 'price_index': 'F2', 'article': 'BNR00022'}, {'competitor': 'Запрос 1', 'request': 'чайник заварочный', 'name_sheet': 'Benerich', 'x': 4, 'y': 'E3', 'price_index': 'F3', 'article': 'BNR00033'}, {'competitor': 'Запрос 1', 'request': 'банки для сыпучих продуктов', 'name_sheet': 'Benerich', 'x': 4, 'y': 'E4', 'price_index': 'F4', 'article': 'BNR00034'}]
 
     print(f'\nПолучил товары для парсинга')
 

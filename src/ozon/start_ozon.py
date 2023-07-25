@@ -1,12 +1,11 @@
 import time
-from datetime import datetime
 
-from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from src.ozon.auth_ozon import AuthOzon
+
 from src.ozon.load_page import LoadPage
 
 
@@ -44,6 +43,24 @@ class StartOzon():
         try:
             self.driver.find_element(by=By.XPATH,
                                      value=f"//*[contains(text(), 'Сохранить запрос')]")
+        except:
+            return False
+
+        return True
+
+    def check_load_good(self, _xpatch):
+        try:
+            WebDriverWait(self.driver, 30).until(
+                EC.presence_of_element_located((By.XPATH, _xpatch)))
+            return True
+        except:
+            return False
+
+
+    def finish_button_search(self):
+        try:
+            self.driver.find_element(by=By.XPATH,
+                                     value=f"//*[contains(text(), 'Показать результаты')]").click()
         except:
             return False
 
@@ -100,6 +117,15 @@ class StartOzon():
             self.driver.find_element(by=By.XPATH,
                                      value=f"//div[contains(@class, 'module_window')]"
                                            f"//*[contains(text(), 'Добавить')]").click()
+        except:
+            return False
+
+        return True
+
+    def reset_article(self):
+        try:
+            self.driver.find_element(by=By.XPATH,
+                                     value=f"//*[contains(text(), 'Сбросить')]").click()
         except:
             return False
 

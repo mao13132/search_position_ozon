@@ -1,13 +1,6 @@
 import time
-from datetime import datetime
 
-from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-from src.ozon.auth_ozon import AuthOzon
-from src.ozon.load_page import LoadPage
 
 
 class JobRegion:

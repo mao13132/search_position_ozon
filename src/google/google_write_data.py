@@ -16,7 +16,7 @@ class GoogleWriteData:
                     "data": [
                         {"range": f"{job['name_sheet']}!{job['price_index']}:{job['price_index']}",
                          "majorDimension": "COLUMNS",
-                         "values": [[job['price']]]}
+                         "values": [[job['position']]]}
                     ]
                 }
             ).execute()

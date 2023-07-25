@@ -2,7 +2,9 @@ import time
 
 from src.google.google_write_data import GoogleWriteData
 from src.ozon.job_article import JobArticle
+from src.ozon.job_get_result import GetGetResult
 from src.ozon.job_region import JobRegion
+from src.ozon.job_request_search import JobRequestsSearch
 from src.ozon.start_ozon import StartOzon
 
 
@@ -47,4 +49,18 @@ class StartIter:
 
             res_job_region = JobRegion(self.driver).start_job_region(input_data_list[1], 'Москва')
 
+            res_insert_requests = JobRequestsSearch(self.driver).start_job_search(input_data_list[0], job['request'])
+
+            res_finish_click_but = ozon_core.finish_button_search()
+
+            res_good_res = ozon_core.check_load_good(f"//tbody//tr[contains(@class, 'row')]//td")
+
+            result = GetGetResult(self.driver).start_job_get_result()
+
+            job['position'] = result
+
+            change_core.write_data(job)
+
             print()
+
+        return True
