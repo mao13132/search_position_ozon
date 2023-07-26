@@ -67,13 +67,13 @@ class JobCabinet:
 
     def get_el_cabinet_name(self, name_cabinet):
         try:
-            self.driver.find_element(by=By.XPATH,
-                                     value=f"//div[contains(@class, 'dataCell')]"
-                                           f"//*[contains(text(), '{name_cabinet}')]")
+            el = self.driver.find_element(by=By.XPATH,
+                                          value=f"//div[contains(@class, 'dataCell')]"
+                                                f"//*[contains(text(), '{name_cabinet}')]")
         except:
             return False
 
-        return True
+        return el
 
     def navigat_to_elem_cabinet(self, elem):
         try:
@@ -93,6 +93,9 @@ class JobCabinet:
 
     def insert_cabinet(self, name_cabinet):
         el_cabinet = self.get_el_cabinet_name(name_cabinet)
+
+        if not el_cabinet:
+            return False
 
         time.sleep(1)
 
@@ -132,7 +135,10 @@ class JobCabinet:
             _name_cabinet = self.get_name_cabinet()
 
             if _name_cabinet != name_cabinet:
-                self.change_cabinet(name_cabinet)
+                res_change = self.change_cabinet(name_cabinet)
+
+                if not res_change:
+                    return False
 
                 if count > 1:
                     time.sleep(1)

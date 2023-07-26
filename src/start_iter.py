@@ -16,6 +16,7 @@ class StartIter:
         self.google_core = google_core
 
     def start_iter(self):
+        black_cabin = []
 
         ozon_core = StartOzon(self.driver)
 
@@ -32,13 +33,22 @@ class StartIter:
 
         for job in self.dict_job:
 
+            if job['name_sheet'] in black_cabin:
+                continue
+
             if job['request'] == '':
                 continue
 
             valid_cabinet_name = cabinet_core.check_name_cabinet(job['name_sheet'])
 
             if not valid_cabinet_name:
-                cabinet_core.start_job_cabinet(job['name_sheet'])
+                res_change_cabinet = cabinet_core.start_job_cabinet(job['name_sheet'])
+
+                if not res_change_cabinet:
+                    print(f'Не смог включить {job["name_sheet"]} кабинет')
+                    black_cabin.append(job["name_sheet"])
+                    continue
+
                 res_click = ozon_core.click_get_search()
 
             input_data_list = ozon_core.get_input_list()
@@ -65,7 +75,5 @@ class StartIter:
             job['position'] = result
 
             change_core.write_data(job)
-
-            print()
 
         return True

@@ -24,6 +24,11 @@ class JobArticle:
 
         res_reset = self.ozon_core.reset_article()
 
+        try:
+            article = article.strip()
+        except:
+            article = article
+
         res_insert_article = self.ozon_core.loop_insert_article(article)
 
         time.sleep(2)

@@ -61,6 +61,11 @@ class JobRequestsSearch:
         return True
 
     def loop_job_search(self, row, request):
+        try:
+            request = request.strip()
+        except:
+            request = request
+
         count = 0
         count_try = 5
         while True:
@@ -113,7 +118,13 @@ class JobRequestsSearch:
                 continue
 
             return True
+
     def start_job_search(self, row, request):
+        try:
+            request = request.strip()
+        except:
+            request = request
+
         res_ = self.loop_job_search(row, request)
 
         if not res_:

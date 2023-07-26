@@ -26,7 +26,7 @@ class CreatBrowser:
         options.add_argument('ignore-certificate-errors')
         options.add_argument("--log-level=3")
         user_system = getpass.getuser()
-        name_profile = 'Sear'
+        name_profile = 'postitions'
 
         if platform_to_os == "Linux":
             path_dir = (f'/Users/{user_system}/Library/Application Support/Google/Chrome/{name_profile}')
