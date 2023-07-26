@@ -2,6 +2,7 @@ import time
 
 from src.google.google_write_data import GoogleWriteData
 from src.ozon.job_article import JobArticle
+from src.ozon.job_cabinet import JobCabinet
 from src.ozon.job_get_result import GetGetResult
 from src.ozon.job_region import JobRegion
 from src.ozon.job_request_search import JobRequestsSearch
@@ -20,21 +21,25 @@ class StartIter:
 
         res_load_ozon = ozon_core.start_load_ozon()
 
-        # TODO авторизация
-
         if not res_load_ozon:
             return False
+
+        cabinet_core = JobCabinet(self.driver)
 
         res_click = ozon_core.click_get_search()
 
         change_core = GoogleWriteData(self.google_core)
 
-        # TODO кликнуть на поиск позиций
-
         for job in self.dict_job:
 
             if job['request'] == '':
                 continue
+
+            valid_cabinet_name = cabinet_core.check_name_cabinet(job['name_sheet'])
+
+            if not valid_cabinet_name:
+                cabinet_core.start_job_cabinet(job['name_sheet'])
+                res_click = ozon_core.click_get_search()
 
             input_data_list = ozon_core.get_input_list()
 

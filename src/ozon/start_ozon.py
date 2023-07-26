@@ -180,7 +180,7 @@ class StartOzon():
 
     def loop_open_popup_products(self, row):
         count = 0
-        count_try = 5
+        count_try = 10
         while True:
             count += 1
             if count > count_try:
