@@ -5,6 +5,7 @@ from src.browser.createbrowser_uc import CreatBrowser
 from src.google.google_modul import GoogleModul
 
 from src.google.google_start import GoogleStart
+from src.ozon.job_geography import JobGeography
 
 from src.start_iter import StartIter
 
@@ -17,6 +18,8 @@ def main():
     print(f'\nПолучил товары для парсинга')
 
     browser = CreatBrowser()
+
+    job_geoph = JobGeography(browser.driver, google_core).start_geography()
 
     res_job = StartIter(browser.driver, data_pars_dict, google_core).start_iter()
 

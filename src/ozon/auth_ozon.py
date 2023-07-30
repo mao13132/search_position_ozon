@@ -58,12 +58,14 @@ class AuthOzon:
                 print(f'Не дождался пользователя, не смог авторизоваться')
                 return False
 
-            try:
-                self.driver.find_element(by=By.XPATH, value=f"//div[contains(@class, 'moduleRoot')]")
-                return True
-            except:
-                time.sleep(3)
-                continue
+            time.sleep(180)
+
+            # try:
+            #     self.driver.find_element(by=By.XPATH, value=f"//div[contains(@class, 'moduleRoot')]")
+            #     return True
+            # except:
+            #     time.sleep(60)
+            #     continue
 
 
     def start_auth(self):
@@ -79,7 +81,7 @@ class AuthOzon:
         if not res_write_login:
             return False
 
-        res_click = self.click_login()
+        # res_click = self.click_login()
 
         print(f'Ввёл данные авторизации жду ввода данных от пользователя')
 

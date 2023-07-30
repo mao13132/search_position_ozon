@@ -28,6 +28,27 @@ class GoogleWriteData:
 
         return True
 
+    def write_procent_geograph(self, value, y):
+        try:
+            self.service.spreadsheets().values().batchUpdate(
+                spreadsheetId=ID_SHEET,
+                body={
+                    "valueInputOption": "USER_ENTERED",
+                    "data": [
+                        {"range": f"Индексы!C{y}:C{y}",
+                         "majorDimension": "COLUMNS",
+                         "values": [[value]]}
+                    ]
+                }
+            ).execute()
+        except Exception as es:
+
+            print(f'Ошибка при изменение Google таблицы "{es}"')
+
+            return False
+
+        return True
+
 
 if __name__ == '__main__':
     from src.google.google_modul import GoogleModul

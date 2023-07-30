@@ -42,6 +42,7 @@ class StartIter:
             valid_cabinet_name = cabinet_core.check_name_cabinet(job['name_sheet'])
 
             if not valid_cabinet_name:
+                print(f'Переключаю кабинет на {job["name_sheet"]}')
                 res_change_cabinet = cabinet_core.start_job_cabinet(job['name_sheet'])
 
                 if not res_change_cabinet:
@@ -49,7 +50,7 @@ class StartIter:
                     black_cabin.append(job["name_sheet"])
                     continue
 
-                res_click = ozon_core.click_get_search()
+            res_click = ozon_core.click_get_search()
 
             input_data_list = ozon_core.get_input_list()
 
@@ -71,6 +72,9 @@ class StartIter:
             res_good_res = ozon_core.check_load_good(f"//tbody//tr[contains(@class, 'row')]//td")
 
             result = GetGetResult(self.driver).start_job_get_result()
+
+            if not result:
+                continue
 
             job['position'] = result
 

@@ -5,6 +5,7 @@ class GoogleGetNameColums:
     def __init__(self, google_core):
         self.google_core = google_core
         self.service = google_core.service
+        self.count = 100000000
 
     def get_name_columns(self, name_sheet):
 
@@ -18,6 +19,23 @@ class GoogleGetNameColums:
 
         except Exception as es:
             print(f'🚫 Ошибка при подключении к Google ({name_sheet}) таблицам "{es}"')
+
+            return False
+
+        return self.values
+
+    def get_geography_cabinet_name(self):
+
+        try:
+
+            self.values = self.service.spreadsheets().values().get(
+                spreadsheetId=ID_SHEET,
+                range=f'Индексы!B2:B{self.count}',
+                majorDimension='COLUMNS'
+            ).execute()
+
+        except Exception as es:
+            print(f'🚫 Ошибка при подключении к Google (индексы) таблицам "{es}"')
 
             return False
 

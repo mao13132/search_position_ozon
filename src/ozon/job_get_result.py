@@ -29,6 +29,9 @@ class GetGetResult:
     def start_job_get_result(self):
         result_list = self.get_rows()
 
+        if result_list == []:
+            return False
+
         result = self.get_result(result_list[0])
 
         return result
