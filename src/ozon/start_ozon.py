@@ -248,7 +248,17 @@ class StartOzon():
 
         result_start_page = LoadPage(self.driver, link).loop_load_page(f"//*[contains(@class, 'totalLocalizationWidget')]")
 
-        # time.sleep(1)
+        if not result_start_page:
+            return False
+
+        res_auth = AuthOzon(self.driver).loop_auth()
+
+        return res_auth
+
+    def load_ozon_cost(self):
+        link = f'https://seller.ozon.ru/app/supply/warehousing-cost/all-categories'
+
+        result_start_page = LoadPage(self.driver, link).loop_load_page(f"//*[contains(@class, 'topSummaryBlockContainer')]")
 
         if not result_start_page:
             return False

@@ -28,16 +28,16 @@ class GoogleWriteData:
 
         return True
 
-    def write_procent_geograph(self, value, y):
+    def write_procent_geograph(self, procent, cost, y):
         try:
             self.service.spreadsheets().values().batchUpdate(
                 spreadsheetId=ID_SHEET,
                 body={
                     "valueInputOption": "USER_ENTERED",
                     "data": [
-                        {"range": f"Индексы!C{y}:C{y}",
-                         "majorDimension": "COLUMNS",
-                         "values": [[value]]}
+                        {"range": f"Индексы!C{y}:D{y}",
+                         "majorDimension": "ROWS",
+                         "values": [[procent, cost]]}
                     ]
                 }
             ).execute()

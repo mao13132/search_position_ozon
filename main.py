@@ -1,5 +1,6 @@
 import os
 
+from settings import GET_STATIC
 from src.browser.createbrowser_uc import CreatBrowser
 
 from src.google.google_modul import GoogleModul
@@ -19,7 +20,8 @@ def main():
 
     browser = CreatBrowser()
 
-    job_geoph = JobGeography(browser.driver, google_core).start_geography()
+    if GET_STATIC:
+        job_geoph = JobGeography(browser.driver, google_core).start_geography()
 
     res_job = StartIter(browser.driver, data_pars_dict, google_core).start_iter()
 

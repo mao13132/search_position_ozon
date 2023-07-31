@@ -1,3 +1,5 @@
+import time
+
 from src.google._slovar import colums_slovar
 from src.google.google_get_name_colums import GoogleGetNameColums
 from src.google.google_write_data import GoogleWriteData
@@ -22,6 +24,49 @@ class JobGeography:
 
         return procent
 
+    def _formated_value(self, value: str):
+        _value = ''
+        for x in value:
+            if x.isdigit():
+                _value += x
+
+        try:
+            _value = int(_value)
+        except:
+            return 0
+
+        return _value
+
+    def get_cost_day(self):
+        try:
+            day_cost = self.driver.find_element(by=By.XPATH,
+                                                value=f"//*[contains(text(), 'дней')]").text
+        except:
+            return ''
+
+        day_cost = self._formated_value(day_cost)
+
+        return day_cost
+
+    def loop_get_cost(self):
+        count = 0
+        count_try = 5
+        while True:
+            count += 1
+            if count > count_try:
+                return 0
+
+            day_cost = self.get_cost_day()
+
+            if day_cost != '':
+                return day_cost
+
+            if count > 1:
+                time.sleep(1)
+
+
+
+
     def job_one_cabinet(self, name_cabinet_name, ozon_core):
 
         cabinet_core = JobCabinet(self.driver)
@@ -40,9 +85,13 @@ class JobGeography:
 
             procent = self.get_procent_local()
 
+            res_load_ozon = ozon_core.load_ozon_cost()
+
+            cost = self.loop_get_cost()
+
             y = count + 2
 
-            change_core.write_procent_geograph(procent, y)
+            change_core.write_procent_geograph(procent, cost, y)
 
             print(f'Вписал процент географии в {cabinet}')
 
@@ -65,4 +114,4 @@ class JobGeography:
 
         res_job_cabinet = self.job_one_cabinet(name_cabinet_name, ozon_core)
 
-        print()
+        print(f'Закончил ')
