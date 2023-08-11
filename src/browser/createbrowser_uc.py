@@ -5,6 +5,8 @@ import undetected_chromedriver as uc
 
 import getpass
 
+from settings import PROFILE_NAME
+
 
 class CreatBrowser:
 
@@ -26,8 +28,7 @@ class CreatBrowser:
         options.add_argument('ignore-certificate-errors')
         options.add_argument("--log-level=3")
         user_system = getpass.getuser()
-        name_profile = 'postitions2'
-        # name_profile = 'postitions'
+        name_profile = PROFILE_NAME
 
         if platform_to_os == "Linux":
             path_dir = (f'/Users/{user_system}/Library/Application Support/Google/Chrome/{name_profile}')

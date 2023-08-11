@@ -81,6 +81,12 @@ class JobGeography:
                 print(f'Переключаю кабинет на {cabinet}')
                 res_change_cabinet = cabinet_core.start_job_cabinet(cabinet)
 
+                if not res_change_cabinet:
+                    print(f'Не смог переключить кабинет')
+                    y = count + 2
+                    change_core.write_procent_geograph('Нет доступа', 'Нет доступа', y)
+                    continue
+
             res_load_ozon = ozon_core.load_ozon_geograph()
 
             procent = self.get_procent_local()
