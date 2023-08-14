@@ -1,3 +1,5 @@
+import time
+
 from settings import NAME_SHEET, ID_SHEET
 from src.google._google_get_sheets_name import GoogleGetSheetsName
 from src.google._slovar import colums_slovar
@@ -66,5 +68,7 @@ class GoogleStart:
                 name_sheet)
 
             good_all_job.extend(dict_job_one_sheet)
+
+            time.sleep(5)
 
         return good_all_job

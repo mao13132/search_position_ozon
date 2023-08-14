@@ -20,22 +20,41 @@ def main():
     browser = CreatBrowser()
 
     if GET_INDEX_SAVE_PRODUCTS:
+        try:
 
-        print(f'\nНачинаю сбор индекса локализации и дней хранения\n')
+            print(f'\nНачинаю сбор индекса локализации и дней хранения\n')
 
-        job_geogr = JobGeography(browser.driver, google_core).start_geography()
+            job_geogr = JobGeography(browser.driver, google_core).start_geography()
 
-        time.sleep(5)
+            time.sleep(5)
+
+        except Exception as es:
+            error = (f'Ошибка в работе модуля по сбору индекса локализаций и дней хранения *.236{es}')
+
+            print(error)
+
+            SendlerOneCreate('').save_text(error)
 
         TimeOwerSave(google_core).write_time('Сбор индекса-хранения')
 
     if JOB_POSITION_SEO:
 
-        data_pars_dict = GoogleStart(google_core).start_get_data()
+        try:
 
-        print(f'\nПолучил поисковые запроса для проверки их позиций\n')
+            data_pars_dict = GoogleStart(google_core).start_get_data()
 
-        res_job = StartIter(browser.driver, data_pars_dict, google_core).start_iter()
+            print(f'\nПолучил поисковые запроса для проверки их позиций\n')
+
+            res_job = StartIter(browser.driver, data_pars_dict, google_core).start_iter()
+
+
+        except Exception as es:
+
+            error = (f'Ошибка в работе модуля по проверке позиций *.236{es}')
+
+            print(error)
+
+            SendlerOneCreate('').save_text(error)
 
         TimeOwerSave(google_core).write_time('Сбор позиций')
 
